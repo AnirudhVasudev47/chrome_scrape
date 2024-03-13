@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notifications",
+  "info": {
+    "singularName": "notification",
+    "pluralName": "notifications",
+    "displayName": "Notification"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "comment": ""
+  },
+  "attributes": {
+    "uuid": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Push Notification",
+        "SMS",
+        "Email"
+      ]
+    },
+    "to": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "message": {
+      "type": "text"
+    },
+    "start": {
+      "type": "datetime"
+    },
+    "end": {
+      "type": "datetime"
+    },
+    "repeat": {
+      "type": "enumeration",
+      "enum": [
+        "None",
+        "Monthly",
+        "Weekly",
+        "Yearly"
+      ]
+    }
+  },
+  "hasEnding": {
+    "type": "boolean",
+    "default": false
+  }
+}
+

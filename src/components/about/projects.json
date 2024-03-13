@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_about_projects",
+  "info": {
+    "displayName": "projects",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "company": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "projDesc": {
+      "type": "text"
+    }
+  }
+}
