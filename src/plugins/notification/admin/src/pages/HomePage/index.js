@@ -7,9 +7,9 @@
 import React, {useEffect, useState} from 'react';
 // import PropTypes from 'prop-types';
 import pluginPkg from "../../../../package.json";
-import {BaseHeaderLayout, Button, ContentLayout, EmptyStateLayout, Layout, Box} from '@strapi/design-system';
+import {BaseHeaderLayout, Button, ContentLayout, EmptyStateLayout, Layout, Box, Flex} from '@strapi/design-system';
 import {LoadingIndicatorPage} from "@strapi/helper-plugin";
-import {Cross, Plus} from "@strapi/icons";
+import {Dashboard, Plus} from "@strapi/icons";
 import ModalAddNotification from "../../components/ModalAddNotification";
 import NotificationTable from "../../components/NotificationTable";
 import EmptyIcon from "../../components/PluginIcon/EmptyIcon";
@@ -80,7 +80,13 @@ const HomePage = () => {
   return (
     <Layout>
       <BaseHeaderLayout
-        primaryAction={<Button startIcon={<Plus/>} onClick={onAddNotification}>Add an entry</Button>}
+        primaryAction={
+          <Flex gap={3}>
+            <Button startIcon={<Dashboard/>} onClick={() => {
+            }}>Dashboard</Button>
+            <Button startIcon={<Plus/>} onClick={onAddNotification}>Add an entry</Button>
+          </Flex>
+        }
         title="Notification Plugin"
         as="h2"/>
       <ContentLayout>

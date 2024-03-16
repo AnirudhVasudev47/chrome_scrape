@@ -1,4 +1,4 @@
-import { prefixPluginTranslations } from '@strapi/helper-plugin';
+import {prefixPluginTranslations} from '@strapi/helper-plugin';
 import pluginPkg from '../../package.json';
 import pluginId from './pluginId';
 import Initializer from './components/Initializer';
@@ -16,9 +16,7 @@ export default {
         defaultMessage: name,
       },
       Component: async () => {
-        const component = await import('./pages/App');
-
-        return component;
+        return await import('./pages/App');
       },
       permissions: [
         // Uncomment to set the permissions of the plugin here

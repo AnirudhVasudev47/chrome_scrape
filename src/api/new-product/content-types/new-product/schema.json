@@ -4,7 +4,8 @@
   "info": {
     "singularName": "new-product",
     "pluralName": "new-products",
-    "displayName": "New Product"
+    "displayName": "New Product",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -22,6 +23,16 @@
       "relation": "oneToOne",
       "target": "api::sub-category.sub-category",
       "inversedBy": "new_product"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

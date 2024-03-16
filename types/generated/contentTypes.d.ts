@@ -862,6 +862,7 @@ export interface ApiNewProductNewProduct extends Schema.CollectionType {
     singularName: 'new-product';
     pluralName: 'new-products';
     displayName: 'New Product';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -874,6 +875,7 @@ export interface ApiNewProductNewProduct extends Schema.CollectionType {
       'oneToOne',
       'api::sub-category.sub-category'
     >;
+    Image: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1091,6 +1093,44 @@ export interface ApiSuperCategorySuperCategory extends Schema.CollectionType {
   };
 }
 
+export interface ApiTestTest extends Schema.CollectionType {
+  collectionName: 'tests';
+  info: {
+    singularName: 'test';
+    pluralName: 'tests';
+    displayName: 'test';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    test_text: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::test.test', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::test.test', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::test.test',
+      'oneToMany',
+      'api::test.test'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1116,6 +1156,7 @@ declare module '@strapi/types' {
       'api::product.product': ApiProductProduct;
       'api::sub-category.sub-category': ApiSubCategorySubCategory;
       'api::super-category.super-category': ApiSuperCategorySuperCategory;
+      'api::test.test': ApiTestTest;
     }
   }
 }
