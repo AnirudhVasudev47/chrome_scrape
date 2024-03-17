@@ -18,9 +18,16 @@
       "type": "enumeration",
       "enum": [
         "Push Notification",
+        "InApp Notification",
         "SMS",
         "Email"
       ]
+    },
+    "link": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
     },
     "to": {
       "type": "string"

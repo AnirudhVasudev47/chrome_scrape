@@ -598,7 +598,11 @@ export interface PluginNotificationNotification extends Schema.CollectionType {
   };
   attributes: {
     uuid: Attribute.String;
-    type: Attribute.Enumeration<['Push Notification', 'SMS', 'Email']>;
+    type: Attribute.Enumeration<
+      ['Push Notification', 'InApp Notification', 'SMS', 'Email']
+    >;
+    link: Attribute.String;
+    icon: Attribute.String;
     to: Attribute.String;
     title: Attribute.String;
     message: Attribute.Text;
