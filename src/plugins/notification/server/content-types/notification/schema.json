@@ -52,11 +52,11 @@
         "Weekly",
         "Yearly"
       ]
+    },
+    "hasEnding": {
+      "type": "boolean",
+      "default": false
     }
-  },
-  "hasEnding": {
-    "type": "boolean",
-    "default": false
   }
 }
 
