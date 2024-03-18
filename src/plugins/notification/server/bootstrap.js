@@ -10,5 +10,9 @@ module.exports = ({strapi}) => {
     if (event.action === 'afterCreate') {
       afterCreate(event)
     }
+
+    if (strapi.isLoaded) {
+
+    }
   });
 };
