@@ -1,4 +1,4 @@
-module.exports = [
+module.exports = ([
   {
     method: "GET",
     path: "/",
@@ -49,4 +49,4 @@ module.exports = [
     },
   },
 
-];
+]);

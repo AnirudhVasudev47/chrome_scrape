@@ -609,6 +609,7 @@ export interface PluginNotificationNotification extends Schema.CollectionType {
     start: Attribute.DateTime;
     end: Attribute.DateTime;
     repeat: Attribute.Enumeration<['None', 'Monthly', 'Weekly', 'Yearly']>;
+    hasEnding: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

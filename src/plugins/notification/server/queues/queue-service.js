@@ -1,7 +1,4 @@
 const Queue = require('bull');
-const sendPush = require("../services/send_push");
-const sendSms = require("../services/send_sms");
-const sendEmail = require("../services/send_email");
 
 const notificationEmailQueue = new Queue('notification_email_queue', {
   redis: {
@@ -24,21 +21,21 @@ const notificationPushQueue = new Queue('notification_push_queue', {
 
 const NOTIFYJOB = 'notifyJob'
 
-const addToQueue = async (jobData) => {
-  let data = {
-    "id": 1,
-    "type": "Push Notification",
-    "to": "c3432weqqw",
-    "title": "qweqweqwe",
-    "message": "qweqweqweqwe",
-    "start": "2024-03-13T19:15:00.000Z",
-    "end": "2024-03-21T19:15:00.000Z",
-    "createdAt": "2024-03-10T19:04:19.431Z",
-    "updatedAt": "2024-03-13T02:32:20.426Z",
-    "uuid": "qweqweqweqwe",
-    "hasEnding": false,
-    "repeat": 'None'
-  }
+const addToQueue = async (data) => {
+  // let data = {
+  //   "id": 1,
+  //   "type": "Push Notification",
+  //   "to": "c3432weqqw",
+  //   "title": "qweqweqwe",
+  //   "message": "qweqweqweqwe",
+  //   "start": "2024-03-13T19:15:00.000Z",
+  //   "end": "2024-03-21T19:15:00.000Z",
+  //   "createdAt": "2024-03-10T19:04:19.431Z",
+  //   "updatedAt": "2024-03-13T02:32:20.426Z",
+  //   "uuid": "qweqweqweqwe",
+  //   "hasEnding": false,
+  //   "repeat": 'None'
+  // }
 
   const scheduleDate = new Date(data.start);
 
@@ -79,7 +76,8 @@ const addToQueue = async (jobData) => {
   switch (data.type.toLowerCase()) {
     case 'push notification':
       // Run once at a specific time and date
-      notificationPushQueue.add(NOTIFYJOB, jobData, options).then(r => {
+      notificationPushQueue.add(NOTIFYJOB, data, options).then(r => {
+        console.log('New event added')
         console.log('resp: ', r)
       }).catch(e => {
         console.log('error: ', e)
@@ -87,15 +85,18 @@ const addToQueue = async (jobData) => {
       break;
     case 'sms':
       // Run monthly at a specific time
-      notificationSmsQueue.add(NOTIFYJOB, jobData, options).then(r => {
+      notificationSmsQueue.add(NOTIFYJOB, data, options).then(r => {
+        console.log('New event added')
         console.log('resp: ', r)
       }).catch(e => {
         console.log('error: ', e)
-      });;
+      });
+      ;
       break;
     case 'email':
       // Run weekly at a specific time
-      notificationEmailQueue.add(NOTIFYJOB, jobData, options).then(r => {
+      notificationEmailQueue.add(NOTIFYJOB, data, options).then(r => {
+        console.log('New event added')
         console.log('resp: ', r)
       }).catch(e => {
         console.log('error: ', e)
@@ -108,6 +109,7 @@ const addToQueue = async (jobData) => {
 }
 
 notificationPushQueue.process(NOTIFYJOB, async (job) => {
+  const {sendPush} = require("../services/send_push");
   const now = new Date();
   let data = job.data
   const endDate = new Date(data.end);
@@ -121,6 +123,7 @@ notificationPushQueue.process(NOTIFYJOB, async (job) => {
 })
 
 notificationEmailQueue.process(NOTIFYJOB, async (job) => {
+  const {sendEmail} = require("../services/send_email");
   const now = new Date();
   let data = job.data
   const endDate = new Date(data.end);
@@ -134,6 +137,7 @@ notificationEmailQueue.process(NOTIFYJOB, async (job) => {
 })
 
 notificationSmsQueue.process(NOTIFYJOB, async (job) => {
+  const {sendSms} = require("../services/send_sms");
   const now = new Date();
   let data = job.data
   const endDate = new Date(data.end);
@@ -145,3 +149,7 @@ notificationSmsQueue.process(NOTIFYJOB, async (job) => {
 
   await sendSms(data);
 })
+
+module.exports = {
+  addToQueue
+};
